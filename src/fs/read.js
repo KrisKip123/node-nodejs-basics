@@ -1,4 +1,4 @@
-import { open, opendir } from "node:fs/promises";
+import { open } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { pathToFiles } from "./constants.js";

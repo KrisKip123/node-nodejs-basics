@@ -1,6 +1,5 @@
 import { pathToFiles } from "./constants.js";
-import { mkdir, stat, readdir, copyFile } from "node:fs/promises";
-import { log } from "node:console";
+import { stat, readdir } from "node:fs/promises";
 
 const list = async () => {
   try {
