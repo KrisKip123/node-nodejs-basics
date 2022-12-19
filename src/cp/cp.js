@@ -1,6 +1,25 @@
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { spawn } from "node:child_process";
+
+const nameFile = "script.js";
+const nameFolder = "files";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 const spawnChildProcess = async (args) => {
-    // Write your code here
+  const customProcess = spawn("node", [
+    resolve(__dirname, nameFolder, nameFile),
+    ...args,
+  ]);
+
+  process.stdin.on("data", (data) => {
+    customProcess.stdin.write(data);
+  });
+
+  customProcess.stdout.on("data", (chunk) => {
+    process.stdout.write(chunk);
+  });
 };
 
-// Put your arguments in function call to test this functionality
-spawnChildProcess( /* [someArgument1, someArgument2, ...] */);
+spawnChildProcess(["--some-arg value1", "--other 1337", "--arg2 42"]);
